@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hemanth Kumar Bogadi — AI Systems Engineer</title>
+  <meta name="description" content="Hemanth Kumar Bogadi — AI Systems Engineer, GenAI Architect, ML Platform Engineer. Building intelligent systems at the frontier." />
+  <meta name="keywords" content="AI Engineer, GenAI, LLM, MLOps, FastAPI, Python, Machine Learning, Hemanth Kumar Bogadi" />
+  <meta property="og:title" content="Hemanth Kumar Bogadi — AI Systems Engineer" />
+  <meta property="og:description" content="GenAI Architect & ML Platform Engineer building frontier AI systems." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            mono: ['DM Mono', 'monospace'],
+            body: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            void: '#04040a',
+            'void-2': '#080812',
+            'void-3': '#0d0d1f',
+            neon: '#7c3aed',
+            'neon-2': '#6366f1',
+            cyan: '#06b6d4',
+            'cyan-dim': '#0e7490',
+            plasma: '#a855f7',
+            frost: 'rgba(255,255,255,0.04)',
+            'frost-2': 'rgba(255,255,255,0.08)',
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'drift': 'drift 20s linear infinite',
+            'shimmer': 'shimmer 2.5s linear infinite',
+          },
+          keyframes: {
+            float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+            drift: { '0%': { transform: 'translateX(-50%) rotate(0deg)' }, '100%': { transform: 'translateX(-50%) rotate(360deg)' } },
+            shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #04040a; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* Animated gradient orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%); top: -200px; left: -200px; animation: orbFloat1 12s ease-in-out infinite; }
+    .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(6,182,212,0.10) 0%, transparent 70%); top: 30%; right: -150px; animation: orbFloat2 15s ease-in-out infinite; }
+    .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(168,85,247,0.10) 0%, transparent 70%); bottom: 10%; left: 30%; animation: orbFloat3 18s ease-in-out infinite; }
+
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,40px)} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,60px)} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-50px)} }
+
+    /* Glass card */
+    .glass {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .glass-hover {
+      transition: all 0.3s ease;
+    }
+    .glass-hover:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(124,58,237,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 60px rgba(124,58,237,0.15);
+    }
+
+    /* Neon text */
+    .neon-text { background: linear-gradient(135deg, #a78bfa, #38bdf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .neon-text-2 { background: linear-gradient(135deg, #06b6d4, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* Grid lines background */
+    .grid-bg {
+      background-image: linear-gradient(rgba(124,58,237,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Glow button */
+    .btn-glow {
+      background: linear-gradient(135deg, #7c3aed, #6366f1);
+      box-shadow: 0 0 20px rgba(124,58,237,0.4), 0 0 60px rgba(124,58,237,0.15);
+      transition: all 0.3s ease;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 0 30px rgba(124,58,237,0.6), 0 0 80px rgba(124,58,237,0.25);
+      transform: translateY(-1px);
+    }
+
+    /* Outline button */
+    .btn-outline {
+      border: 1px solid rgba(124,58,237,0.5);
+      color: #a78bfa;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(124,58,237,0.1);
+      border-color: #7c3aed;
+      box-shadow: 0 0 20px rgba(124,58,237,0.2);
+    }
+
+    /* Skill tag */
+    .skill-tag {
+      background: rgba(124,58,237,0.08);
+      border: 1px solid rgba(124,58,237,0.2);
+      color: #c4b5fd;
+      transition: all 0.2s;
+    }
+    .skill-tag:hover {
+      background: rgba(124,58,237,0.18);
+      border-color: rgba(124,58,237,0.5);
+    }
+
+    /* Timeline line */
+    .timeline-line { background: linear-gradient(to bottom, #7c3aed, #06b6d4, transparent); }
+
+    /* Shimmer loader */
+    .shimmer-text {
+      background: linear-gradient(90deg, transparent 0%, rgba(167,139,250,0.6) 50%, transparent 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* Cursor dot */
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7c3aed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(124,58,237,0.5);
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+    }
+
+    /* Scroll indicator */
+    .scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #7c3aed, #06b6d4);
+      z-index: 9997;
+      transition: width 0.1s ease;
+    }
+
+    /* Nav */
+    .nav-link {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      font-family: 'DM Mono', monospace;
+    }
+    .nav-link:hover { color: #a78bfa; }
+    .nav-link.active { color: #a78bfa; }
+
+    /* Section tag */
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7c3aed;
+    }
+
+    /* Fade in animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stat card glow */
+    .stat-glow { box-shadow: inset 0 0 30px rgba(124,58,237,0.05); }
+
+    /* Project card accent */
+    .project-accent::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #7c3aed, #06b6d4, transparent);
+    }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+  </style>
+</head>
+<body class="text-white">
+
+  <!-- Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Scroll progress -->
+  <div class="scroll-bar" id="scroll-bar"></div>
+
+  <!-- Background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50" id="navbar">
+    <div class="glass border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center text-xs font-bold font-mono shadow-lg shadow-violet-500/30">HB</div>
+          <span class="font-display font-700 text-sm text-white/80 group-hover:text-white transition-colors">Hemanth Kumar</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="#resume" class="btn-glow px-4 py-2 rounded-lg text-sm font-medium text-white">Resume</a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button class="md:hidden text-white/60 hover:text-white p-2" id="menu-btn">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path id="menu-icon-open" d="M3 6h18M3 12h18M3 18h18"/>
+            <path id="menu-icon-close" class="hidden" d="M6 6l12 12M6 18L18 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="md:hidden border-t border-white/5 px-6 py-4 space-y-3">
+        <a href="#about" class="block nav-link py-2">About</a>
+        <a href="#projects" class="block nav-link py-2">Projects</a>
+        <a href="#skills" class="block nav-link py-2">Skills</a>
+        <a href="#experience" class="block nav-link py-2">Experience</a>
+        <a href="contact.html" class="block nav-link py-2">Contact</a>
+        <a href="#resume" class="block btn-glow text-center px-4 py-2 rounded-lg text-sm font-medium text-white mt-2">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section class="relative min-h-screen grid-bg flex flex-col justify-center pt-24 pb-16 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="max-w-5xl">
+
+        <!-- Status badge -->
+        <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8 border border-violet-500/20 fade-up" id="hero-badge">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-mono text-xs text-white/60 tracking-wider">AVAILABLE FOR OPPORTUNITIES</span>
+        </div>
+
+        <!-- Main title -->
+        <h1 class="hero-title text-white mb-6 fade-up" id="hero-title" style="transition-delay:0.1s">
+          Building AI Systems<br/>
+          <span class="neon-text">at the Frontier</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-white/50 text-lg md:text-xl max-w-2xl mb-4 font-light fade-up" id="hero-sub" style="transition-delay:0.2s">
+          AI Systems Engineer · GenAI Architect · ML Platform Engineer
+        </p>
+        <p class="text-white/30 max-w-xl mb-10 fade-up" style="transition-delay:0.3s">
+          Designing and deploying production-grade AI infrastructure — from LLM orchestration layers to high-throughput ML pipelines. Turning research into reliable systems.
+        </p>
+
+        <!-- CTA buttons -->
+        <div class="flex flex-wrap gap-4 fade-up" style="transition-delay:0.4s">
+          <a href="#projects" class="btn-glow px-6 py-3 rounded-xl font-medium text-white flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            View Projects
+          </a>
+          <a href="about.html" class="btn-outline px-6 py-3 rounded-xl font-medium flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            About Me
+          </a>
+          <a href="contact.html" class="btn-outline px-6 py-3 rounded-xl font-medium flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Get in Touch
+          </a>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 fade-up" style="transition-delay:0.5s">
+          <div class="glass stat-glow rounded-xl p-4 text-center">
+            <div class="text-2xl font-display font-bold neon-text">5+</div>
+            <div class="text-white/40 text-xs mt-1 font-mono uppercase tracking-wider">Projects</div>
+          </div>
+          <div class="glass stat-glow rounded-xl p-4 text-center">
+            <div class="text-2xl font-display font-bold neon-text">3+</div>
+            <div class="text-white/40 text-xs mt-1 font-mono uppercase tracking-wider">Years Exp</div>
+          </div>
+          <div class="glass stat-glow rounded-xl p-4 text-center">
+            <div class="text-2xl font-display font-bold neon-text">20+</div>
+            <div class="text-white/40 text-xs mt-1 font-mono uppercase tracking-wider">Tech Stack</div>
+          </div>
+          <div class="glass stat-glow rounded-xl p-4 text-center">
+            <div class="text-2xl font-display font-bold neon-text">4</div>
+            <div class="text-white/40 text-xs mt-1 font-mono uppercase tracking-wider">Roles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20 fade-up" style="transition-delay:0.8s">
+      <span class="font-mono text-xs tracking-widest">SCROLL</span>
+      <div class="w-px h-12 bg-gradient-to-b from-violet-500/50 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+  <section id="about" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+
+        <!-- Left: Text -->
+        <div class="fade-up">
+          <div class="section-tag mb-4">// 01 — About</div>
+          <h2 class="section-title text-white mb-6">AI Engineer.<br/><span class="neon-text-2">System Architect.</span></h2>
+          <p class="text-white/50 mb-4 leading-relaxed">
+            I'm Hemanth Kumar Bogadi — an AI Systems Engineer based in Gudivada, Andhra Pradesh. I specialize in building production-ready ML infrastructure, GenAI multi-agent systems, and backend platforms that run at scale.
+          </p>
+          <p class="text-white/40 mb-6 leading-relaxed">
+            My work bridges research and production: translating state-of-the-art models into reliable, observable, maintainable systems. I care deeply about MLOps, system observability, and building tools that other engineers love to use.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="skill-tag px-3 py-1 rounded-full text-sm">GenAI Architect</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm">ML Platform Eng</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm">Backend AI Infra</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm">LLM Orchestration</span>
+          </div>
+          <a href="about.html" class="btn-outline px-5 py-2.5 rounded-lg inline-flex items-center gap-2 text-sm">
+            Full Profile
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Right: Info cards -->
+        <div class="space-y-4 fade-up" style="transition-delay:0.15s">
+          <div class="glass glass-hover rounded-2xl p-5 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <div>
+              <div class="text-white/80 font-medium mb-1">No-Code AI Training Platform</div>
+              <div class="text-white/40 text-sm">ML/DL/LLM training from UI with HuggingFace & MLflow integration</div>
+            </div>
+          </div>
+          <div class="glass glass-hover rounded-2xl p-5 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <div>
+              <div class="text-white/80 font-medium mb-1">Enterprise GenAI Multi-Agent Systems</div>
+              <div class="text-white/40 text-sm">Orchestrator + specialist agents with governance & evaluation frameworks</div>
+            </div>
+          </div>
+          <div class="glass glass-hover rounded-2xl p-5 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="text-white/80 font-medium mb-1">High-Throughput API Gateway</div>
+              <div class="text-white/40 text-sm">FastAPI + Redis caching + JWT/OAuth2 microservice routing</div>
+            </div>
+          </div>
+          <!-- Location -->
+          <div class="glass rounded-2xl p-5 flex items-center gap-4">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div class="text-white/60 text-sm">Gudivada, Andhra Pradesh, India</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-xs font-mono text-emerald-400/70 bg-emerald-400/10 border border-emerald-400/20 px-2 py-1 rounded-full">Open to Remote</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FEATURED PROJECTS ═══════════════════════ -->
+  <section id="projects" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 fade-up">
+        <div>
+          <div class="section-tag mb-4">// 02 — Projects</div>
+          <h2 class="section-title text-white">Featured <span class="neon-text">Systems</span></h2>
+        </div>
+        <a href="projects.html" class="btn-outline px-5 py-2.5 rounded-lg inline-flex items-center gap-2 text-sm self-start">
+          All Projects
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Project grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Project 1: No-Code AI Training -->
+        <div class="glass glass-hover rounded-2xl p-6 relative overflow-hidden project-accent fade-up" style="transition-delay:0.05s">
+          <!-- Architecture diagram placeholder -->
+          <div class="w-full h-36 rounded-xl mb-5 overflow-hidden bg-gradient-to-br from-violet-900/30 to-cyan-900/20 border border-white/5 flex items-center justify-center relative">
+            <div class="absolute inset-0 grid-bg opacity-50"></div>
+            <div class="relative text-center">
+              <div class="text-3xl mb-1">🤖</div>
+              <div class="font-mono text-xs text-violet-400/60">UI → Training → Deploy</div>
+            </div>
+            <div class="absolute top-2 right-2">
+              <span class="text-xs font-mono text-cyan-400/60 bg-cyan-400/5 border border-cyan-400/10 px-2 py-1 rounded">MLOps</span>
+            </div>
+          </div>
+          <h3 class="text-white font-display font-semibold text-lg mb-2">No-Code AI Training Platform</h3>
+          <p class="text-white/40 text-sm mb-4 leading-relaxed">ML/DL/LLM model training from a visual UI. HuggingFace integration, custom model builder, MLflow tracking, real-time training logs.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">PyTorch</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">HuggingFace</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">MLflow</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">FastAPI</span>
+          </div>
+          <a href="projects.html#no-code-ai" class="text-violet-400 text-sm font-mono flex items-center gap-1 hover:text-violet-300 transition-colors">
+            View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Project 2: Multi-Agent -->
+        <div class="glass glass-hover rounded-2xl p-6 relative overflow-hidden project-accent fade-up" style="transition-delay:0.1s">
+          <div class="w-full h-36 rounded-xl mb-5 overflow-hidden bg-gradient-to-br from-blue-900/30 to-purple-900/20 border border-white/5 flex items-center justify-center relative">
+            <div class="absolute inset-0 grid-bg opacity-50"></div>
+            <div class="relative text-center">
+              <div class="text-3xl mb-1">🧠</div>
+              <div class="font-mono text-xs text-blue-400/60">Orchestrator → Agents</div>
+            </div>
+            <div class="absolute top-2 right-2">
+              <span class="text-xs font-mono text-violet-400/60 bg-violet-400/5 border border-violet-400/10 px-2 py-1 rounded">GenAI</span>
+            </div>
+          </div>
+          <h3 class="text-white font-display font-semibold text-lg mb-2">Enterprise GenAI Multi-Agent Architecture</h3>
+          <p class="text-white/40 text-sm mb-4 leading-relaxed">Orchestrator + specialist agents + tools layer with governance framework and evaluation pipeline for enterprise deployments.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">LangChain</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">LLM</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">RBAC</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">Evaluation</span>
+          </div>
+          <a href="projects.html#multi-agent" class="text-violet-400 text-sm font-mono flex items-center gap-1 hover:text-violet-300 transition-colors">
+            View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Project 3: Security Analytics -->
+        <div class="glass glass-hover rounded-2xl p-6 relative overflow-hidden project-accent fade-up" style="transition-delay:0.15s">
+          <div class="w-full h-36 rounded-xl mb-5 overflow-hidden bg-gradient-to-br from-emerald-900/20 to-cyan-900/30 border border-white/5 flex items-center justify-center relative">
+            <div class="absolute inset-0 grid-bg opacity-50"></div>
+            <div class="relative text-center">
+              <div class="text-3xl mb-1">🛡️</div>
+              <div class="font-mono text-xs text-emerald-400/60">ELK → Threat Intel</div>
+            </div>
+            <div class="absolute top-2 right-2">
+              <span class="text-xs font-mono text-emerald-400/60 bg-emerald-400/5 border border-emerald-400/10 px-2 py-1 rounded">Security</span>
+            </div>
+          </div>
+          <h3 class="text-white font-display font-semibold text-lg mb-2">Security Analytics Dashboard</h3>
+          <p class="text-white/40 text-sm mb-4 leading-relaxed">Real-time threat visualization using ELK Stack. Elasticsearch indexing, Logstash pipelines, and Kibana dashboards for security ops.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">Elasticsearch</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">Logstash</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">Kibana</span>
+          </div>
+          <a href="projects.html#security" class="text-violet-400 text-sm font-mono flex items-center gap-1 hover:text-violet-300 transition-colors">
+            View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Project 4: API Gateway -->
+        <div class="glass glass-hover rounded-2xl p-6 relative overflow-hidden project-accent fade-up" style="transition-delay:0.2s">
+          <div class="w-full h-36 rounded-xl mb-5 overflow-hidden bg-gradient-to-br from-orange-900/20 to-red-900/20 border border-white/5 flex items-center justify-center relative">
+            <div class="absolute inset-0 grid-bg opacity-50"></div>
+            <div class="relative text-center">
+              <div class="text-3xl mb-1">⚡</div>
+              <div class="font-mono text-xs text-orange-400/60">Gateway → Microservices</div>
+            </div>
+            <div class="absolute top-2 right-2">
+              <span class="text-xs font-mono text-orange-400/60 bg-orange-400/5 border border-orange-400/10 px-2 py-1 rounded">Infra</span>
+            </div>
+          </div>
+          <h3 class="text-white font-display font-semibold text-lg mb-2">High-Throughput API Gateway</h3>
+          <p class="text-white/40 text-sm mb-4 leading-relaxed">FastAPI-based gateway with Redis caching, JWT/OAuth2 auth, rate limiting, and intelligent microservice routing at scale.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">FastAPI</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">Redis</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">JWT</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">OAuth2</span>
+          </div>
+          <a href="projects.html#gateway" class="text-violet-400 text-sm font-mono flex items-center gap-1 hover:text-violet-300 transition-colors">
+            View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Project 5: FraudShield -->
+        <div class="glass glass-hover rounded-2xl p-6 relative overflow-hidden project-accent fade-up" style="transition-delay:0.25s">
+          <div class="w-full h-36 rounded-xl mb-5 overflow-hidden bg-gradient-to-br from-pink-900/20 to-rose-900/20 border border-white/5 flex items-center justify-center relative">
+            <div class="absolute inset-0 grid-bg opacity-50"></div>
+            <div class="relative text-center">
+              <div class="text-3xl mb-1">🔍</div>
+              <div class="font-mono text-xs text-pink-400/60">SMOTE → XGBoost → API</div>
+            </div>
+            <div class="absolute top-2 right-2">
+              <span class="text-xs font-mono text-pink-400/60 bg-pink-400/5 border border-pink-400/10 px-2 py-1 rounded">ML</span>
+            </div>
+          </div>
+          <h3 class="text-white font-display font-semibold text-lg mb-2">FraudShield — Credit Card Fraud Detection</h3>
+          <p class="text-white/40 text-sm mb-4 leading-relaxed">SMOTE oversampling, Random Forest & XGBoost ensemble, PCA dimensionality reduction, deployed via FastAPI.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">XGBoost</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">SMOTE</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">Scikit-learn</span>
+            <span class="skill-tag text-xs px-2 py-0.5 rounded">PCA</span>
+          </div>
+          <a href="projects.html#fraudshield" class="text-violet-400 text-sm font-mono flex items-center gap-1 hover:text-violet-300 transition-colors">
+            View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- CTA card -->
+        <div class="glass rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between border border-violet-500/15 fade-up" style="transition-delay:0.3s">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-4">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3 class="text-white font-display font-semibold text-lg mb-2">More Architecture Work</h3>
+            <p class="text-white/40 text-sm leading-relaxed">Explore system designs, workflow diagrams, and architectural patterns behind each project.</p>
+          </div>
+          <a href="projects.html" class="btn-glow mt-6 px-5 py-2.5 rounded-xl text-sm font-medium text-white text-center">
+            Explore All →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ SKILLS ═══════════════════════ -->
+  <section id="skills" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="fade-up mb-14">
+        <div class="section-tag mb-4">// 03 — Skills</div>
+        <h2 class="section-title text-white">Technical <span class="neon-text">Arsenal</span></h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- AI/ML -->
+        <div class="glass glass-hover rounded-2xl p-6 fade-up" style="transition-delay:0.05s">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-violet-500/15 border border-violet-500/25 flex items-center justify-center">
+              <span class="text-sm">🧠</span>
+            </div>
+            <span class="text-white/80 font-medium text-sm">AI / ML Frameworks</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">PyTorch</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">TensorFlow</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Transformers</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Scikit-learn</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">LangChain</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">OpenCV</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Pandas</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">NumPy</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="glass glass-hover rounded-2xl p-6 fade-up" style="transition-delay:0.1s">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/15 border border-cyan-500/25 flex items-center justify-center">
+              <span class="text-sm">⚙️</span>
+            </div>
+            <span class="text-white/80 font-medium text-sm">Backend & APIs</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Python</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">FastAPI</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Django</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">DRF</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">REST APIs</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Microservices</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">JWT</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">OAuth2</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">RBAC</span>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="glass glass-hover rounded-2xl p-6 fade-up" style="transition-delay:0.15s">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/15 border border-purple-500/25 flex items-center justify-center">
+              <span class="text-sm">🗄️</span>
+            </div>
+            <span class="text-white/80 font-medium text-sm">Data & Storage</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">PostgreSQL</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">MySQL</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Cassandra</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Elasticsearch</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Redis</span>
+          </div>
+        </div>
+
+        <!-- DevOps/Infra -->
+        <div class="glass glass-hover rounded-2xl p-6 fade-up" style="transition-delay:0.2s">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center">
+              <span class="text-sm">🐳</span>
+            </div>
+            <span class="text-white/80 font-medium text-sm">DevOps & Infra</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Docker</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">CI/CD</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">MLflow</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Logstash</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Kibana</span>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="glass glass-hover rounded-2xl p-6 fade-up" style="transition-delay:0.25s">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-rose-500/15 border border-rose-500/25 flex items-center justify-center">
+              <span class="text-sm">🔐</span>
+            </div>
+            <span class="text-white/80 font-medium text-sm">Security & Auth</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">JWT</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">OAuth2</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">RBAC</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">Rate Limiting</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs">ELK Security</span>
+          </div>
+        </div>
+
+        <!-- Currently Exploring -->
+        <div class="glass rounded-2xl p-6 border border-violet-500/15 fade-up" style="transition-delay:0.3s">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+              <span class="text-sm">🚀</span>
+            </div>
+            <span class="text-white/80 font-medium text-sm">Exploring</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs opacity-70">RAG Pipelines</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs opacity-70">Vector DBs</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs opacity-70">Agent Frameworks</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs opacity-70">Model Serving</span>
+            <span class="skill-tag px-2.5 py-1 rounded-lg text-xs opacity-70">Fine-tuning</span>
+          </div>
+          <div class="mt-4 pt-4 border-t border-white/5">
+            <span class="text-xs font-mono text-white/30 tracking-wider">ALWAYS LEARNING</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ EXPERIENCE ═══════════════════════ -->
+  <section id="experience" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="fade-up mb-14">
+        <div class="section-tag mb-4">// 04 — Experience</div>
+        <h2 class="section-title text-white">Career <span class="neon-text">Timeline</span></h2>
+      </div>
+
+      <div class="max-w-3xl">
+
+        <!-- Timeline item 1 -->
+        <div class="flex gap-6 mb-10 fade-up">
+          <div class="flex flex-col items-center">
+            <div class="w-3 h-3 rounded-full bg-violet-400 mt-1 flex-shrink-0 shadow-lg shadow-violet-400/50"></div>
+            <div class="timeline-line w-px flex-1 mt-2"></div>
+          </div>
+          <div class="glass glass-hover rounded-2xl p-6 flex-1 mb-0">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-display font-semibold">Freelance ML/AI & Full-Stack Developer</h3>
+                <p class="text-violet-400 text-sm font-mono mt-0.5">Independent</p>
+              </div>
+              <span class="text-xs font-mono text-white/30 bg-white/5 px-3 py-1 rounded-full">Jan 2025 – Present</span>
+            </div>
+            <p class="text-white/40 text-sm leading-relaxed">Building AI-powered systems, GenAI applications, and scalable backends for clients. Focus on LLM integration, MLOps pipelines, and production-ready architectures.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">GenAI</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">LangChain</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">FastAPI</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">MLOps</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline item 2 -->
+        <div class="flex gap-6 mb-10 fade-up" style="transition-delay:0.1s">
+          <div class="flex flex-col items-center">
+            <div class="w-3 h-3 rounded-full bg-cyan-400 mt-1 flex-shrink-0 shadow-lg shadow-cyan-400/50"></div>
+            <div class="timeline-line w-px flex-1 mt-2"></div>
+          </div>
+          <div class="glass glass-hover rounded-2xl p-6 flex-1">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-display font-semibold">Technical Trainer</h3>
+                <p class="text-cyan-400 text-sm font-mono mt-0.5">Naipunyam Initiative, Govt. of Andhra Pradesh</p>
+              </div>
+              <span class="text-xs font-mono text-white/30 bg-white/5 px-3 py-1 rounded-full">2026 – Ongoing</span>
+            </div>
+            <p class="text-white/40 text-sm leading-relaxed">Training students and professionals in Python, AI/ML, and software engineering under a Government of Andhra Pradesh skilling initiative.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">Python</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">ML</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">Training</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline item 3 -->
+        <div class="flex gap-6 mb-10 fade-up" style="transition-delay:0.2s">
+          <div class="flex flex-col items-center">
+            <div class="w-3 h-3 rounded-full bg-purple-400 mt-1 flex-shrink-0 shadow-lg shadow-purple-400/50"></div>
+            <div class="timeline-line w-px flex-1 mt-2"></div>
+          </div>
+          <div class="glass glass-hover rounded-2xl p-6 flex-1">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-display font-semibold">Associate Software Engineer</h3>
+                <p class="text-purple-400 text-sm font-mono mt-0.5">eTutorConnect</p>
+              </div>
+              <span class="text-xs font-mono text-white/30 bg-white/5 px-3 py-1 rounded-full">Feb 2024 – Dec 2024</span>
+            </div>
+            <p class="text-white/40 text-sm leading-relaxed">Backend development and REST API design for an ed-tech platform. Worked on user management systems, data pipelines, and performance optimization.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">Django</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">PostgreSQL</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">REST APIs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline item 4 -->
+        <div class="flex gap-6 fade-up" style="transition-delay:0.3s">
+          <div class="flex flex-col items-center">
+            <div class="w-3 h-3 rounded-full bg-indigo-400 mt-1 flex-shrink-0 shadow-lg shadow-indigo-400/50"></div>
+          </div>
+          <div class="glass glass-hover rounded-2xl p-6 flex-1">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-display font-semibold">Associate Software Engineer</h3>
+                <p class="text-indigo-400 text-sm font-mono mt-0.5">Eficens Systems</p>
+              </div>
+              <span class="text-xs font-mono text-white/30 bg-white/5 px-3 py-1 rounded-full">Mar 2023 – Jan 2024</span>
+            </div>
+            <p class="text-white/40 text-sm leading-relaxed">Developed backend services and contributed to ML feature integration. Built REST APIs, implemented security middleware, and maintained CI/CD pipelines.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">Python</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">FastAPI</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">Docker</span>
+              <span class="skill-tag text-xs px-2 py-0.5 rounded">CI/CD</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ EDUCATION ═══════════════════════ -->
+  <section id="education" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="fade-up mb-14">
+        <div class="section-tag mb-4">// 05 — Education</div>
+        <h2 class="section-title text-white">Academic <span class="neon-text">Foundation</span></h2>
+      </div>
+      <div class="max-w-2xl">
+        <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden project-accent fade-up">
+          <div class="flex items-start gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600/20 to-cyan-600/20 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+              <span class="text-2xl">🎓</span>
+            </div>
+            <div>
+              <h3 class="text-white font-display font-bold text-xl mb-1">B.Tech — Computer Science & Engineering</h3>
+              <p class="text-violet-400 font-mono text-sm mb-3">Ponnaiyah Ramajayam Institute of Science & Technology</p>
+              <div class="flex flex-wrap gap-4 text-white/40 text-sm">
+                <span class="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  2018 – 2022
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  CGPA: 7.8 / 10
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ RESUME ═══════════════════════ -->
+  <section id="resume" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="glass rounded-3xl p-10 md:p-16 text-center relative overflow-hidden border border-violet-500/15 fade-up">
+        <!-- Background glow -->
+        <div class="absolute inset-0 bg-gradient-to-r from-violet-900/10 to-cyan-900/10"></div>
+        <div class="relative">
+          <div class="section-tag mb-4 text-center">// 06 — Resume</div>
+          <h2 class="section-title text-white mb-4">Download My <span class="neon-text">Resume</span></h2>
+          <p class="text-white/40 mb-8 max-w-lg mx-auto">Full profile including technical skills, project details, and contact information.</p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a href="resume.pdf" download class="btn-glow px-8 py-3.5 rounded-xl font-medium text-white inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Resume (PDF)
+            </a>
+            <a href="contact.html" class="btn-outline px-8 py-3.5 rounded-xl font-medium inline-flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Contact Me
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="border-t border-white/5 py-10 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center text-xs font-bold font-mono">HB</div>
+          <span class="text-white/40 text-sm font-mono">Hemanth Kumar Bogadi</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="mailto:hemanthk.b@proton.me" class="text-white/30 hover:text-violet-400 transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/hemanth-kumar-bogadi" target="_blank" rel="noopener" class="text-white/30 hover:text-violet-400 transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="contact.html" class="text-white/30 hover:text-violet-400 transition-colors text-sm font-mono">Contact →</a>
+        </div>
+        <p class="text-white/20 text-xs font-mono">© 2025 Hemanth Kumar Bogadi</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+    function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+    animateRing();
+    document.querySelectorAll('a,button').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'rgba(124,58,237,0.8)'; });
+      el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(124,58,237,0.5)'; });
+    });
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.getElementById('scroll-bar').style.width = scrolled + '%';
+    });
+
+    // Navbar glass on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    }));
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Trigger hero immediately
+    setTimeout(() => {
+      ['hero-badge','hero-title','hero-sub'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('visible');
+      });
+    }, 100);
+  </script>
+</body>
+</html>

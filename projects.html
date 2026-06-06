@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Hemanth Kumar Bogadi</title>
+  <meta name="description" content="AI systems, GenAI architectures, ML platforms, and backend infrastructure projects by Hemanth Kumar Bogadi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            mono: ['DM Mono', 'monospace'],
+            body: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #04040a; font-family: 'Outfit', sans-serif; overflow-x: hidden; color: white; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+    .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%); top: -200px; right: -100px; animation: orbFloat1 14s ease-in-out infinite; }
+    .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%); bottom: 20%; left: -100px; animation: orbFloat2 18s ease-in-out infinite; }
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,50px)} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-40px)} }
+
+    .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.07); }
+    .glass-hover { transition: all 0.3s ease; }
+    .glass-hover:hover { background: rgba(255,255,255,0.055); border-color: rgba(124,58,237,0.35); transform: translateY(-2px); box-shadow: 0 20px 60px rgba(124,58,237,0.12); }
+
+    .neon-text { background: linear-gradient(135deg, #a78bfa, #38bdf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .grid-bg { background-image: linear-gradient(rgba(124,58,237,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px); background-size: 60px 60px; }
+    .btn-glow { background: linear-gradient(135deg, #7c3aed, #6366f1); box-shadow: 0 0 20px rgba(124,58,237,0.4); transition: all 0.3s ease; }
+    .btn-glow:hover { box-shadow: 0 0 30px rgba(124,58,237,0.6); transform: translateY(-1px); }
+    .btn-outline { border: 1px solid rgba(124,58,237,0.5); color: #a78bfa; transition: all 0.3s ease; }
+    .btn-outline:hover { background: rgba(124,58,237,0.1); border-color: #7c3aed; }
+    .skill-tag { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); color: #c4b5fd; transition: all 0.2s; }
+    .skill-tag:hover { background: rgba(124,58,237,0.18); }
+    .nav-link { color: rgba(255,255,255,0.5); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; font-family: 'DM Mono', monospace; }
+    .nav-link:hover, .nav-link.active { color: #a78bfa; }
+    .section-tag { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7c3aed; }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+    .scroll-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, #7c3aed, #06b6d4); z-index: 9997; transition: width 0.1s ease; }
+
+    /* Project accent top border */
+    .project-accent::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-color, #7c3aed), transparent); }
+
+    /* Architecture diagram placeholder */
+    .arch-diagram {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      position: relative;
+    }
+
+    /* Filter buttons */
+    .filter-btn { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: rgba(124,58,237,0.4); color: #a78bfa; }
+    .filter-btn.active { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.5); color: #a78bfa; }
+
+    .section-title { font-size: clamp(1.8rem, 4vw, 3rem); font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  </style>
+</head>
+<body>
+  <div class="scroll-bar" id="scroll-bar"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50">
+    <div class="glass border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center text-xs font-bold font-mono shadow-lg shadow-violet-500/30">HB</div>
+          <span class="font-display font-700 text-sm text-white/80 group-hover:text-white transition-colors">Hemanth Kumar</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html#about" class="nav-link">About</a>
+          <a href="projects.html" class="nav-link active">Projects</a>
+          <a href="index.html#skills" class="nav-link">Skills</a>
+          <a href="index.html#experience" class="nav-link">Experience</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="index.html#resume" class="btn-glow px-4 py-2 rounded-lg text-sm font-medium text-white">Resume</a>
+        </div>
+        <button class="md:hidden text-white/60 hover:text-white p-2" id="menu-btn">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path id="menu-icon-open" d="M3 6h18M3 12h18M3 18h18"/>
+            <path id="menu-icon-close" class="hidden" d="M6 6l12 12M6 18L18 6"/>
+          </svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="md:hidden border-t border-white/5 px-6 py-4 space-y-3">
+        <a href="index.html#about" class="block nav-link py-2">About</a>
+        <a href="projects.html" class="block nav-link active py-2">Projects</a>
+        <a href="index.html#skills" class="block nav-link py-2">Skills</a>
+        <a href="index.html#experience" class="block nav-link py-2">Experience</a>
+        <a href="contact.html" class="block nav-link py-2">Contact</a>
+        <a href="index.html#resume" class="block btn-glow text-center px-4 py-2 rounded-lg text-sm font-medium text-white mt-2">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="pt-32 pb-16 grid-bg relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="section-tag mb-4 fade-up">// Projects & Systems</div>
+      <h1 class="section-title text-white mb-4 fade-up" style="font-size:clamp(2.2rem,6vw,4.5rem);line-height:1.05;">
+        Engineered <span class="neon-text">AI Systems</span>
+      </h1>
+      <p class="text-white/40 max-w-xl text-lg fade-up" style="transition-delay:0.1s">
+        Production-grade ML platforms, GenAI architectures, and backend infrastructure — each designed for reliability at scale.
+      </p>
+
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap gap-2 mt-8 fade-up" style="transition-delay:0.2s" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="genai">GenAI</button>
+        <button class="filter-btn" data-filter="mlops">MLOps</button>
+        <button class="filter-btn" data-filter="backend">Backend</button>
+        <button class="filter-btn" data-filter="ml">ML</button>
+        <button class="filter-btn" data-filter="security">Security</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS LIST -->
+  <section class="py-16 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 space-y-12">
+
+      <!-- ── Project 1: No-Code AI Training Platform ── -->
+      <div id="no-code-ai" class="glass glass-hover rounded-3xl overflow-hidden project-accent fade-up" style="--accent-color:#7c3aed" data-tags="mlops genai">
+        <div class="grid lg:grid-cols-2 gap-0">
+          <!-- Diagram side -->
+          <div class="arch-diagram m-6 lg:m-8 h-64 lg:h-auto lg:min-h-72 flex items-center justify-center" style="background: linear-gradient(135deg, #0d0624 0%, #080d1f 100%);">
+            <div class="w-full h-full p-6 flex flex-col justify-center relative">
+              <div class="absolute inset-0 grid-bg opacity-30"></div>
+              <!-- Architecture SVG diagram -->
+              <div class="relative">
+                <div class="text-center mb-4">
+                  <span class="font-mono text-xs text-violet-400/60 tracking-widest uppercase">System Architecture</span>
+                </div>
+                <div class="flex flex-col items-center gap-3">
+                  <div class="glass rounded-xl px-6 py-3 border border-violet-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-violet-300">🖥️ Web UI / Dashboard</div>
+                    <div class="text-xs text-white/30 mt-0.5">Model config · Training params</div>
+                  </div>
+                  <div class="w-px h-5 bg-gradient-to-b from-violet-500 to-cyan-500"></div>
+                  <div class="glass rounded-xl px-6 py-3 border border-cyan-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-cyan-300">⚙️ Training Orchestrator</div>
+                    <div class="text-xs text-white/30 mt-0.5">FastAPI · Job Queue · Workers</div>
+                  </div>
+                  <div class="flex gap-4 w-full max-w-xs">
+                    <div class="w-px h-5 bg-gradient-to-b from-cyan-500 to-purple-500 mx-auto"></div>
+                    <div class="w-px h-5 bg-gradient-to-b from-cyan-500 to-emerald-500 mx-auto"></div>
+                  </div>
+                  <div class="flex gap-3 w-full max-w-xs">
+                    <div class="glass rounded-lg px-3 py-2 border border-purple-500/20 flex-1 text-center">
+                      <div class="text-xs font-mono text-purple-300">🤗 HuggingFace</div>
+                    </div>
+                    <div class="glass rounded-lg px-3 py-2 border border-emerald-500/20 flex-1 text-center">
+                      <div class="text-xs font-mono text-emerald-300">📊 MLflow</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content side -->
+          <div class="p-6 lg:p-10 flex flex-col justify-center">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs font-mono text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-full">MLOps</span>
+              <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-full">GenAI</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">No-Code AI Training Platform</h2>
+            <p class="text-white/50 mb-6 leading-relaxed">
+              A visual platform enabling users to train ML, DL, and LLM models without writing code. Integrates HuggingFace's model hub for base models, a custom model builder UI, MLflow for experiment tracking, and real-time training log streaming via WebSockets.
+            </p>
+
+            <!-- Feature list -->
+            <div class="space-y-2 mb-6">
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Visual model configuration with drag-and-drop layer builder
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                HuggingFace integration for 100k+ pre-trained model selection
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Real-time training logs, loss curves, and metric dashboards
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                MLflow experiment tracking and model versioning
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                One-click model export and deployment API generation
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">PyTorch</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">TensorFlow</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">HuggingFace</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">MLflow</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">FastAPI</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">WebSocket</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Docker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Project 2: Enterprise GenAI Multi-Agent ── -->
+      <div id="multi-agent" class="glass glass-hover rounded-3xl overflow-hidden project-accent fade-up" style="--accent-color:#06b6d4" data-tags="genai">
+        <div class="grid lg:grid-cols-2 gap-0">
+          <!-- Content side (reversed) -->
+          <div class="p-6 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs font-mono text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full">GenAI</span>
+              <span class="text-xs font-mono text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-full">Enterprise</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Enterprise GenAI Multi-Agent Architecture</h2>
+            <p class="text-white/50 mb-6 leading-relaxed">
+              A production-ready multi-agent system for enterprise GenAI workflows. Features an orchestrator layer that routes tasks to specialist agents, a tools layer for external integrations, a governance framework for compliance, and an evaluation pipeline for quality assurance.
+            </p>
+            <div class="space-y-2 mb-6">
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Central orchestrator for dynamic task decomposition and routing
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Specialist agents: Research, Code Gen, Data Analysis, Summarization
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Governance layer: RBAC, PII redaction, audit logging
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Automated evaluation framework with faithfulness & relevance scoring
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Tool integrations: Web search, DB queries, code execution sandboxes
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">LangChain</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">OpenAI</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">FastAPI</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">RBAC</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">PostgreSQL</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Redis</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Docker</span>
+            </div>
+          </div>
+
+          <!-- Diagram side -->
+          <div class="arch-diagram m-6 lg:m-8 h-64 lg:h-auto order-1 lg:order-2 flex items-center justify-center" style="background: linear-gradient(135deg, #04091a 0%, #0c0520 100%);">
+            <div class="w-full h-full p-6 flex flex-col justify-center relative">
+              <div class="absolute inset-0 grid-bg opacity-30"></div>
+              <div class="relative">
+                <div class="text-center mb-4">
+                  <span class="font-mono text-xs text-cyan-400/60 tracking-widest uppercase">Agent Topology</span>
+                </div>
+                <!-- Orchestrator at top -->
+                <div class="flex justify-center mb-2">
+                  <div class="glass rounded-xl px-5 py-2.5 border border-cyan-500/40 text-center">
+                    <div class="text-xs font-mono text-cyan-300">🧠 Orchestrator LLM</div>
+                  </div>
+                </div>
+                <div class="flex justify-center gap-8 mb-1">
+                  <div class="w-px h-4 bg-cyan-500/50"></div>
+                  <div class="w-px h-4 bg-cyan-500/50"></div>
+                  <div class="w-px h-4 bg-cyan-500/50"></div>
+                </div>
+                <!-- Agents row -->
+                <div class="grid grid-cols-3 gap-2 mb-2">
+                  <div class="glass rounded-lg p-2 border border-violet-500/20 text-center">
+                    <div class="text-xs font-mono text-violet-300">🔬 Research</div>
+                  </div>
+                  <div class="glass rounded-lg p-2 border border-blue-500/20 text-center">
+                    <div class="text-xs font-mono text-blue-300">💻 Code Gen</div>
+                  </div>
+                  <div class="glass rounded-lg p-2 border border-emerald-500/20 text-center">
+                    <div class="text-xs font-mono text-emerald-300">📊 Analysis</div>
+                  </div>
+                </div>
+                <div class="w-px h-4 bg-gradient-to-b from-violet-500 to-rose-500 mx-auto"></div>
+                <!-- Tools layer -->
+                <div class="glass rounded-xl p-2.5 border border-rose-500/20 text-center mb-2">
+                  <div class="text-xs font-mono text-rose-300">🛠️ Tools Layer (Search · DB · Code Exec)</div>
+                </div>
+                <div class="w-px h-4 bg-gradient-to-b from-rose-500 to-amber-500 mx-auto"></div>
+                <!-- Governance -->
+                <div class="glass rounded-xl p-2.5 border border-amber-500/20 text-center">
+                  <div class="text-xs font-mono text-amber-300">🛡️ Governance + Eval Framework</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Project 3: Security Analytics Dashboard ── -->
+      <div id="security" class="glass glass-hover rounded-3xl overflow-hidden project-accent fade-up" style="--accent-color:#10b981" data-tags="security">
+        <div class="grid lg:grid-cols-2 gap-0">
+          <!-- Diagram side -->
+          <div class="arch-diagram m-6 lg:m-8 h-64 lg:h-auto flex items-center justify-center" style="background: linear-gradient(135deg, #041409 0%, #040d12 100%);">
+            <div class="w-full h-full p-6 flex flex-col justify-center relative">
+              <div class="absolute inset-0 grid-bg opacity-30"></div>
+              <div class="relative">
+                <div class="text-center mb-4">
+                  <span class="font-mono text-xs text-emerald-400/60 tracking-widest uppercase">ELK Pipeline</span>
+                </div>
+                <div class="flex flex-col items-center gap-3">
+                  <div class="flex gap-3 w-full max-w-xs">
+                    <div class="glass rounded-lg p-2 border border-white/10 flex-1 text-center">
+                      <div class="text-xs font-mono text-white/50">📡 Syslog</div>
+                    </div>
+                    <div class="glass rounded-lg p-2 border border-white/10 flex-1 text-center">
+                      <div class="text-xs font-mono text-white/50">🔥 Firewall</div>
+                    </div>
+                    <div class="glass rounded-lg p-2 border border-white/10 flex-1 text-center">
+                      <div class="text-xs font-mono text-white/50">🌐 App Logs</div>
+                    </div>
+                  </div>
+                  <div class="w-px h-4 bg-gradient-to-b from-white/20 to-orange-500 mx-auto"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-orange-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-orange-300">⚙️ Logstash (Ingestion + Parse)</div>
+                  </div>
+                  <div class="w-px h-4 bg-gradient-to-b from-orange-500 to-yellow-500 mx-auto"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-yellow-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-yellow-300">🔍 Elasticsearch (Index + Query)</div>
+                  </div>
+                  <div class="w-px h-4 bg-gradient-to-b from-yellow-500 to-emerald-500 mx-auto"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-emerald-500/40 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-emerald-300">📊 Kibana (Threat Dashboard)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content side -->
+          <div class="p-6 lg:p-10 flex flex-col justify-center">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">Security</span>
+              <span class="text-xs font-mono text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2.5 py-1 rounded-full">Analytics</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Security Analytics Dashboard</h2>
+            <p class="text-white/50 mb-6 leading-relaxed">
+              Real-time threat visualization and security analytics powered by the ELK Stack. Ingests logs from firewalls, syslog, and applications, parses them through Logstash pipelines, indexes in Elasticsearch, and presents actionable threat intelligence in Kibana.
+            </p>
+            <div class="space-y-2 mb-6">
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Real-time log ingestion from multiple sources via Logstash
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Elasticsearch full-text indexing with millisecond query response
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Custom Kibana dashboards: heatmaps, timelines, geo-IP maps
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Automated alerting for anomaly detection and threat patterns
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Elasticsearch</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Logstash</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Kibana</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Python</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Docker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Project 4: High-Throughput API Gateway ── -->
+      <div id="gateway" class="glass glass-hover rounded-3xl overflow-hidden project-accent fade-up" style="--accent-color:#f97316" data-tags="backend">
+        <div class="grid lg:grid-cols-2 gap-0">
+          <!-- Content side -->
+          <div class="p-6 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs font-mono text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2.5 py-1 rounded-full">Backend</span>
+              <span class="text-xs font-mono text-red-400 bg-red-500/10 border border-red-500/20 px-2.5 py-1 rounded-full">Infra</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">High-Throughput API Gateway</h2>
+            <p class="text-white/50 mb-6 leading-relaxed">
+              A production-grade API gateway built with FastAPI, designed to handle high-concurrency traffic with Redis caching, intelligent rate limiting, JWT/OAuth2 authentication, and dynamic microservice routing.
+            </p>
+            <div class="space-y-2 mb-6">
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Redis-backed response caching with TTL and cache invalidation
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                JWT + OAuth2 auth with RBAC permission layers
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Sliding-window and token-bucket rate limiting per client
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Dynamic microservice routing with health-check load balancing
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Request/response logging and distributed tracing middleware
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">FastAPI</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Redis</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">JWT</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">OAuth2</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">RBAC</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Docker</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">PostgreSQL</span>
+            </div>
+          </div>
+
+          <!-- Diagram side -->
+          <div class="arch-diagram m-6 lg:m-8 h-64 lg:h-auto order-1 lg:order-2 flex items-center justify-center" style="background: linear-gradient(135deg, #120600 0%, #100808 100%);">
+            <div class="w-full h-full p-6 flex flex-col justify-center relative">
+              <div class="absolute inset-0 grid-bg opacity-30"></div>
+              <div class="relative">
+                <div class="text-center mb-4">
+                  <span class="font-mono text-xs text-orange-400/60 tracking-widest uppercase">Gateway Flow</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                  <div class="glass rounded-xl px-5 py-2.5 border border-white/10 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-white/50">📱 Client Request</div>
+                  </div>
+                  <div class="w-px h-3 bg-orange-500/50"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-orange-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-orange-300">🔐 Auth Middleware (JWT/OAuth2)</div>
+                  </div>
+                  <div class="w-px h-3 bg-orange-500/50"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-yellow-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-yellow-300">🚦 Rate Limiter</div>
+                  </div>
+                  <div class="w-px h-3 bg-yellow-500/50"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-red-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-red-300">⚡ Redis Cache Check</div>
+                  </div>
+                  <div class="w-px h-3 bg-red-500/50"></div>
+                  <div class="flex gap-2 w-full max-w-xs">
+                    <div class="glass rounded-lg p-2 border border-emerald-500/20 flex-1 text-center">
+                      <div class="text-xs font-mono text-emerald-300">🟢 Service A</div>
+                    </div>
+                    <div class="glass rounded-lg p-2 border border-blue-500/20 flex-1 text-center">
+                      <div class="text-xs font-mono text-blue-300">🔵 Service B</div>
+                    </div>
+                    <div class="glass rounded-lg p-2 border border-purple-500/20 flex-1 text-center">
+                      <div class="text-xs font-mono text-purple-300">🟣 Service C</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Project 5: FraudShield ── -->
+      <div id="fraudshield" class="glass glass-hover rounded-3xl overflow-hidden project-accent fade-up" style="--accent-color:#ec4899" data-tags="ml">
+        <div class="grid lg:grid-cols-2 gap-0">
+          <!-- Diagram side -->
+          <div class="arch-diagram m-6 lg:m-8 h-64 lg:h-auto flex items-center justify-center" style="background: linear-gradient(135deg, #120418 0%, #0c040c 100%);">
+            <div class="w-full h-full p-6 flex flex-col justify-center relative">
+              <div class="absolute inset-0 grid-bg opacity-30"></div>
+              <div class="relative">
+                <div class="text-center mb-4">
+                  <span class="font-mono text-xs text-pink-400/60 tracking-widest uppercase">ML Pipeline</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                  <div class="glass rounded-xl px-5 py-2.5 border border-white/10 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-white/50">📄 Raw Transaction Data</div>
+                  </div>
+                  <div class="w-px h-3 bg-pink-500/50"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-pink-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-pink-300">⚖️ SMOTE Oversampling</div>
+                  </div>
+                  <div class="w-px h-3 bg-pink-500/50"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-violet-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-violet-300">📐 PCA Dimensionality Reduction</div>
+                  </div>
+                  <div class="w-px h-3 bg-violet-500/50"></div>
+                  <div class="flex gap-2 w-full max-w-xs">
+                    <div class="glass rounded-lg p-2 border border-green-500/20 flex-1 text-center">
+                      <div class="text-xs font-mono text-green-300">🌲 Random Forest</div>
+                    </div>
+                    <div class="glass rounded-lg p-2 border border-cyan-500/20 flex-1 text-center">
+                      <div class="text-xs font-mono text-cyan-300">⚡ XGBoost</div>
+                    </div>
+                  </div>
+                  <div class="w-px h-3 bg-cyan-500/50"></div>
+                  <div class="glass rounded-xl px-5 py-2.5 border border-orange-500/30 text-center w-full max-w-xs">
+                    <div class="text-xs font-mono text-orange-300">🚀 FastAPI Deployment</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content side -->
+          <div class="p-6 lg:p-10 flex flex-col justify-center">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs font-mono text-pink-400 bg-pink-500/10 border border-pink-500/20 px-2.5 py-1 rounded-full">ML</span>
+              <span class="text-xs font-mono text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 rounded-full">FinTech</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">FraudShield — Credit Card Fraud Detection</h2>
+            <p class="text-white/50 mb-6 leading-relaxed">
+              An end-to-end ML system for real-time credit card fraud detection. Handles severe class imbalance with SMOTE, applies PCA for feature engineering, ensembles Random Forest and XGBoost for robust classification, and serves predictions via a FastAPI endpoint.
+            </p>
+            <div class="space-y-2 mb-6">
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                SMOTE oversampling to address 0.17% fraud class imbalance
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                PCA reducing 30 features to 15 principal components
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Random Forest + XGBoost ensemble for 98%+ AUC-ROC score
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                FastAPI inference endpoint with &lt;50ms prediction latency
+              </div>
+              <div class="flex items-start gap-2.5 text-sm text-white/50">
+                <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Dockerized deployment with model versioning via MLflow
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Scikit-learn</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">XGBoost</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">SMOTE</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">PCA</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">Pandas</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">FastAPI</span>
+              <span class="skill-tag px-2.5 py-1 rounded text-xs">MLflow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 text-center fade-up">
+      <div class="glass rounded-3xl p-10 border border-violet-500/15 max-w-2xl mx-auto">
+        <h2 class="text-2xl font-display font-bold text-white mb-3">Want to collaborate?</h2>
+        <p class="text-white/40 mb-6">I'm open to freelance AI/ML projects, consulting, and full-time opportunities.</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="contact.html" class="btn-glow px-6 py-3 rounded-xl font-medium text-white">Get in Touch</a>
+          <a href="index.html#resume" class="btn-outline px-6 py-3 rounded-xl font-medium">Download Resume</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 py-10 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center text-xs font-bold font-mono">HB</div>
+        <span class="text-white/40 text-sm font-mono">Hemanth Kumar Bogadi</span>
+      </div>
+      <div class="flex gap-6">
+        <a href="mailto:hemanthk.b@proton.me" class="text-white/30 hover:text-violet-400 transition-colors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/hemanth-kumar-bogadi" target="_blank" rel="noopener" class="text-white/30 hover:text-violet-400 transition-colors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+      <p class="text-white/20 text-xs font-mono">© 2025 Hemanth Kumar Bogadi</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.getElementById('scroll-bar').style.width = scrolled + '%';
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('[data-tags]');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        projects.forEach(p => {
+          if (filter === 'all' || p.dataset.tags.includes(filter)) {
+            p.style.display = '';
+          } else {
+            p.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
